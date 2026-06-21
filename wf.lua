@@ -2135,7 +2135,7 @@ do
         Size           = UDim2.new(1,-4,1,0);
         TextSize       = 14;
         TextXAlignment = Enum.TextXAlignment.Left;
-        ZIndex         = 203;
+        ZIndex         = 253;
         Parent         = WatermarkInnerFrame;
     })
 
