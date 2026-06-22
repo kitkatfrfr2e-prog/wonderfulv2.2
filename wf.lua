@@ -1,3 +1,4 @@
+
 local InputService = game:GetService('UserInputService');
 local TextService = game:GetService('TextService');
 local CoreGui = game:GetService('CoreGui');
@@ -1480,7 +1481,7 @@ do
         Library:AddToRegistry(TInner, { BackgroundColor3='MainColor'; BorderColor3='OutlineColor' })
 
         local TLabel = Library:CreateLabel({
-            Size           = UDim2.new(0,216,1,0);
+            Size           = UDim2.new(0,296,1,0);
             Position       = UDim2.new(1,6,0,0);
             TextSize       = 14;
             Text           = Info.Text;
@@ -1564,7 +1565,7 @@ do
             Min     = Info.Min;
             Max     = Info.Max;
             Rounding = Info.Rounding;
-            MaxSize  = 323;
+            MaxSize  = 306;
             Type     = 'Slider';
             Callback = Info.Callback or function() end;
         }
