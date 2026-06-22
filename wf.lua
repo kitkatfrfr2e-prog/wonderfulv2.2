@@ -1564,7 +1564,7 @@ do
             Min     = Info.Min;
             Max     = Info.Max;
             Rounding = Info.Rounding;
-            MaxSize  = 380;
+            MaxSize  = 330;
             Type     = 'Slider';
             Callback = Info.Callback or function() end;
         }
@@ -2315,7 +2315,7 @@ function Library:CreateWindow(...)
     if type(Config.MenuFadeTime)~= 'number' then Config.MenuFadeTime = 0.2 end
 
     if typeof(Config.Position) ~= 'UDim2' then Config.Position = UDim2.fromOffset(175, 50) end
-    if typeof(Config.Size)     ~= 'UDim2' then Config.Size     = UDim2.fromOffset(800, 440) end
+    if typeof(Config.Size)     ~= 'UDim2' then Config.Size     = UDim2.fromOffset(700, 440) end
 
     if Config.Center then
         Config.AnchorPoint = Vector2.new(0.5, 0.5)
