@@ -47,7 +47,11 @@ local Library = {
 
     Black  = Color3.new(0, 0, 0);
     Font   = Enum.Font.Code;
-
+    FontFace = Font.new(
+        "rbxasset://fonts/families/Geist.json",
+        Enum.FontWeight.SemiBold,
+        Enum.FontStyle.Normal
+    );
     OpenedFrames    = {};
     DependencyBoxes = {};
 
