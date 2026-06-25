@@ -2800,11 +2800,11 @@ function Library:CreateWindow(...)
                 local State = InputService.MouseIconEnabled
 
                 local Cursor = Drawing.new('Triangle')
-                Cursor.Thickness = 1; Cursor.Filled = true; Cursor.Visible = true
+                Cursor.Thickness = 1; Cursor.Filled = true; Cursor.Visible = 1
 
                 local COut = Drawing.new('Triangle')
                 COut.Thickness = 1; COut.Filled = false
-                COut.Color = Color3.new(0,0,0); COut.Visible = true
+                COut.Color = Color3.new(0,0,0); COut.Visible = 1
 
                 while Toggled and ScreenGui.Parent do
                     InputService.MouseIconEnabled = false
