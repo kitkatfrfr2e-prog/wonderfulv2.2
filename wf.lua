@@ -1,4 +1,7 @@
-print(1)
+print(2)
+
+
+
 local InputService = game:GetService('UserInputService');
 local TextService = game:GetService('TextService');
 local CoreGui = game:GetService('CoreGui');
@@ -58,6 +61,30 @@ local Library = {
     Signals   = {};
     ScreenGui = ScreenGui;
 };
+
+
+
+
+local UIFont = Font.new(
+    "rbxasset://fonts/families/Geist.json",
+    Enum.FontWeight.SemiBold,
+    Enum.FontStyle.Normal
+)
+
+if obj:IsA("TextLabel")
+or obj:IsA("TextButton")
+or obj:IsA("TextBox") then
+    obj.FontFace = UIFont
+end
+
+
+
+
+
+
+
+
+
 
 local RainbowStep = 0
 local Hue = 0
