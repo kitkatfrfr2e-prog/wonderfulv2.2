@@ -2788,67 +2788,38 @@ function Library:CreateWindow(...)
     local Fading  = false
 
     function Library:Toggle()
-        if Fading then return end
-        local FadeTime = Config.MenuFadeTime
-        Fading  = true
-        Toggled = not Toggled
-        ModalElement.Modal = Toggled
-
-        if Toggled then
-            Outer.Visible = true
-            task.spawn(function()
-                local State = InputService.MouseIconEnabled
-
-                local Cursor = Drawing.new('Triangle')
-                Cursor.Thickness = 1; Cursor.Filled = true; Cursor.Visible = true
-
-                local COut = Drawing.new('Triangle')
-                COut.Thickness = 1; COut.Filled = false
-                COut.Color = Color3.new(0,0,0); COut.Visible = true
-
-                while Toggled and ScreenGui.Parent do
-                    InputService.MouseIconEnabled = false
-                    local mP = InputService:GetMouseLocation()
-                    Cursor.Color  = Library.AccentColor
-                    Cursor.PointA = Vector2.new(mP.X, mP.Y)
-                    Cursor.PointB = Vector2.new(mP.X+16, mP.Y+6)
-                    Cursor.PointC = Vector2.new(mP.X+6,  mP.Y+16)
-                    COut.PointA = Cursor.PointA; COut.PointB = Cursor.PointB; COut.PointC = Cursor.PointC
-                    RenderStepped:Wait()
-                end
-
-                InputService.MouseIconEnabled = State
-                Cursor:Remove(); COut:Remove()
-            end)
-        end
-
-        for _, Desc in next, Outer:GetDescendants() do
-            local Props = {}
-            if Desc:IsA('ImageLabel') then
-                table.insert(Props,'ImageTransparency'); table.insert(Props,'BackgroundTransparency')
-            elseif Desc:IsA('TextLabel') or Desc:IsA('TextBox') then
-                table.insert(Props,'TextTransparency')
-            elseif Desc:IsA('Frame') or Desc:IsA('ScrollingFrame') then
-                table.insert(Props,'BackgroundTransparency')
-            elseif Desc:IsA('UIStroke') then
-                table.insert(Props,'Transparency')
-            end
-
-            local Cache = TransparencyCache[Desc]
-            if not Cache then Cache = {}; TransparencyCache[Desc] = Cache end
-
-            for _, Prop in next, Props do
-                if not Cache[Prop] then Cache[Prop] = Desc[Prop] end
-                if Cache[Prop] == 1 then continue end
-                TweenService:Create(Desc, TweenInfo.new(FadeTime, Enum.EasingStyle.Linear),
-                    { [Prop] = Toggled and Cache[Prop] or 1 }):Play()
-            end
-        end
-
-        task.wait(FadeTime)
-        Outer.Visible = Toggled
-        Fading = false
+    if Fading then return end
+    local FadeTime = Config.MenuFadeTime
+    Fading  = true
+    Toggled = not Toggled
+    ModalElement.Modal = Toggled
+    if Toggled then
+        Outer.Visible = true
     end
+    for _, Desc in next, Outer:GetDescendants() do
+        local Props = {}
+        if Desc:IsA('ImageLabel') then
+            table.insert(Props,'ImageTransparency'); table.insert(Props,'BackgroundTransparency')
+        elseif Desc:IsA('TextLabel') or Desc:IsA('TextBox') then
+            table.insert(Props,'TextTransparency')
+        elseif Desc:IsA('Frame') or Desc:IsA('ScrollingFrame') then
+            table.insert(Props,'BackgroundTransparency')
+        elseif Desc:IsA('UIStroke') then
+            table.insert(Props,'Transparency')
+        end
+        local Cache = TransparencyCache[Desc]
+        if not Cache then Cache = {}; TransparencyCache[Desc] = Cache end
+        for _, Prop in next, Props do
+            if not Cache[Prop] then Cache[Prop] = Desc[Prop] end
+            if Cache[Prop] == 1 then continue end
+            TweenService:Create(Desc, TweenInfo.new(FadeTime, Enum.EasingStyle.Linear),
+                { [Prop] = Toggled and Cache[Prop] or 1 }):Play()
+        end
+    end
+    task.wait(FadeTime)
+    Outer.Visible = Toggled
+    Fading = false
+end
 
     Library:GiveSignal(InputService.InputBegan:Connect(function(I, Processed)
         if type(Library.ToggleKeybind)=='table' and Library.ToggleKeybind.Type=='KeyPicker' then
