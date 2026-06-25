@@ -1,4 +1,4 @@
-print(2)
+print(23)
 
 
 
@@ -65,20 +65,6 @@ local Library = {
 
 
 
-local UIFont = Font.new(
-    "rbxasset://fonts/families/Geist.json",
-    Enum.FontWeight.SemiBold,
-    Enum.FontStyle.Normal
-)
-
-if obj:IsA("TextLabel")
-or obj:IsA("TextButton")
-or obj:IsA("TextBox") then
-    obj.FontFace = UIFont
-end
-
-
-
 
 
 
@@ -133,10 +119,20 @@ end;
 
 --- Создаёт инстанс или применяет свойства к существующему
 function Library:Create(Class, Properties)
-    local inst = type(Class) == 'string' and Instance.new(Class) or Class
-    for k, v in next, Properties do inst[k] = v end
-    return inst;
-end;
+    local inst = type(Class) == "string" and Instance.new(Class) or Class
+
+    for k, v in next, Properties do
+        inst[k] = v
+    end
+
+    if inst:IsA("TextLabel")
+    or inst:IsA("TextButton")
+    or inst:IsA("TextBox") then
+        inst.FontFace = Library.FontFace
+    end
+
+    return inst
+end
 
 --- Вспомогательный UICorner
 local function AddCorner(parent, radius)
